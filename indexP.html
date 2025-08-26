@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michel FATCHEHOUN - Étudiant en Génie Telecom et TIC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #7c3aed;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Sections générales */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        /* À propos */
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Formation */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Langues */
+        .languages {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .language-item {
+            text-align: center;
+        }
+        
+        .language-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .language-level {
+            display: flex;
+            gap: 0.3rem;
+        }
+        
+        .language-level span {
+            display: inline-block;
+            width: 20px;
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+        
+        /* Centres d'intérêt */
+        .interests {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .interest-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .interest-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .interest-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .contact .section-title h2 {
+            color: white;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Michel F.</div>
+            <div class="nav-links">
+                <a href="#accueil">Accueil</a>
+                <a href="#apropos">À propos</a>
+                <a href="#competences">Compétences</a>
+                <a href="#formation">Formation</a>
+                <a href="#projets">Projets</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="container hero-content">
+            <h1>Michel FATCHEHOUN</h1>
+            <p>Étudiant en Génie Telecom et TIC</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn">Me contacter</a>
+                <a href="#projets" class="btn btn-secondary">Voir mes projets</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section class="about" id="apropos">
+        <div class="container">
+            <div class="section-title">
+                <h2>À propos de moi</h2>
+                <p>Découvrez mon parcours et mes aspirations professionnelles</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Étudiant passionné par les technologies</h3>
+                    <p>Je suis Michel FATCHEHOUN, étudiant en Génie Télécommunications et Technologies de l'Information et de la Communication à l'UCAO-UUC de Cotonou. Actuellement en deuxième année de formation.</p>
+                    <p>Je suis passionné par les nouvelles technologies et leur application pour résoudre des problèmes complexes et améliorer le quotidien des personnes.</p>
+                    <p>Mes qualités principales incluent la proactivité, la créativité et une grande capacité à travailler sous pression. Je suis également minutieux, ponctuel, éloquent, sociable et coopératif.</p>
+                </div>
+                <div class="about-image">
+                    
+<img src="C:\Users\HP\OneDrive\Documents\PremierProjet\pipeline-cicd-simulation\images\Capture d'écran 2025-03-10 015234.png" alt="Michel FATCHEHOUN">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="competences" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes Compétences</h2>
+                <p>Un aperçu de mes domaines d'expertise technique et personnelle</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Logiciels Maîtrisés</h3>
+                    <p>Word, Excel, PowerPoint</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Programmation</h3>
+                    <p>Création de sites web HTML/CSS, Codage en C, C++, Java, Matlab</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Réseaux</h3>
+                    <p>Connaissances en Cisco Packet Tracer</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Qualités Personnelles</h3>
+                    <p>Pro-actif, créatif, travail sous pression, minutieux</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <div class="section-title">
+                    <h3>Langues Maîtrisées</h3>
+                </div>
+                <div class="languages">
+                    <div class="language-item">
+                        <div class="language-name">Français</div>
+                        <div class="language-level">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Anglais</div>
+                        <div class="language-level">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Fon</div>
+                        <div class="language-level">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Formation -->
+    <section id="formation">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mon Parcours</h2>
+                <p>Mon parcours académique et formation</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Octobre 2024 - Présent</div>
+                        <h3>Génie Telecom et TIC - 2ème année</h3>
+                        <p>UCAO-UUC, Cotonou</p>
+                        <p>Deuxième année d'ingénierie en Télécommunications et Technologies de l'Information et de la Communication</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Octobre 2023 - Juin 2024</div>
+                        <h3>Génie Telecom et TIC - 1ère année</h3>
+                        <p>UCAO-UUC, Cotonou</p>
+                        <p>Première année d'ingénierie en Télécommunications et Technologies de l'Information et de la Communication</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Juin 2023</div>
+                        <h3>Baccalauréat Série C</h3>
+                        <p>Collège Catholique Père Aupiais, Cotonou</p>
+                        <p>Obtention du Baccalauréat clôturant le cursus scolaire</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2023</div>
+                        <h3>Enseignement Secondaire</h3>
+                        <p>Collège Catholique Père Aupiais, Cotonou</p>
+                        <p>Cycle secondaire supérieur</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2016 - 2019</div>
+                        <h3>Enseignement Secondaire</h3>
+                        <p>Cours Secondaires Saint Augustin, Cotonou</p>
+                        <p>Cycle secondaire inférieur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes Projets</h2>
+                <p>Quelques-uns de mes projets académiques et personnels</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Site Web Personnel</h3>
+                        <p>Création d'un site web portfolio en HTML/CSS avec design responsive.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Simulation Réseau</h3>
+                        <p>Configuration d'un réseau local avec Cisco Packet Tracer.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Application Calculatrice</h3>
+                        <p>Développement d'une calculatrice en langage C avec interface graphique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Centres d'intérêt -->
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Centres d'intérêt</h2>
+                <p>Mes passions et activités en dehors du domaine professionnel</p>
+            </div>
+            <div class="interests">
+                <div class="interest-item">
+                    <i class="fas fa-book"></i>
+                    <h3>Lecture</h3>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-film"></i>
+                    <h3>Documentaires</h3>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-running"></i>
+                    <h3>Sport</h3>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-futbol"></i>
+                    <h3>Football</h3>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-basketball-ball"></i>
+                    <h3>Basketball</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-moi</h2>
+                <p>N'hésitez pas à me contacter pour toute opportunité</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>fatchehounakwale@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+229 01 54 80 19 52</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Cotonou, Bénin</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Né le 2 octobre 2005</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="logo">Michel FATCHEHOUN</div>
+            <p>Étudiant en Génie Telecom et TIC</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:fatchehounakwale@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>© 2024 Michel FATCHEHOUN. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.skill-card, .timeline-content, .interest-item, .project-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(element);
+            });
+
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Merci pour votre message! Je vous répondrai très rapidement.');
+                    this.reset();
+                });
+            }
+
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                    nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.15)';
+                } else {
+                    nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                    nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
